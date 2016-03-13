@@ -5,7 +5,7 @@ body.landing {
  .hero-content {
      position: relative;
      min-height: 600px;
-     background-image: url(../assets/images/bloc_jams_bg.jpg);
+     background-image: url(../assets/images/logo.jpg);
      background-repeat: no-repeat;
      background-position: center center;
      background-size: cover;
@@ -28,15 +28,11 @@ body.landing {
  
  .selling-points {
      position: relative;
-     display: table;
-     width: 100%;
     
  }
  
  .point {
-     display: table-cell;
      position: relative;
-     width: 33.3%;
      padding: 2rem;
      text-align: center;
  }
