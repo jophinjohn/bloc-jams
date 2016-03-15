@@ -51,3 +51,12 @@ html {
      .column.flow-opposite { float: right; } 
  }
 
+.clearfix::before,
+.clearfix::after {
+   content: " ";
+   display: table;
+}
+
+.clearfix::after {
+   clear: both;
+}
