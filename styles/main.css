@@ -61,7 +61,7 @@ html {
    /* #5 */
  .links-container .navbar-link:hover {
      color: rgb(233,50,117);
- };
+ }
 
 .container {
      margin: 0 auto;
@@ -99,3 +99,7 @@ html {
 .clearfix::after {
    clear: both;
 }
+.links-container .navbar-link:active {
+     color: rgb(233,50,117);
+     background-color: white;
+ }
