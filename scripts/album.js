@@ -76,14 +76,22 @@ var setCurrentAlbum = function(album) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
  };
-var findParentByClassName = function(element, targetClass) {
-    if (element) {
-        var currentParent = element.parentElement;
-        while (currentParent.className != targetClass && currentParent.className !== null) {
-            currentParent = currentParent.parentElement;
-        }
-        return currentParent;
+var findParentByClassName = function(targetClass, element) {
+  var currentParent = element.parentElement;
+
+  if (currentParent == null) {
+    return alert("no parent found");
+  }
+
+  if (currentParent.parentElement != null) {
+    if (currentParent.className == targetClass) {
+      return currentParent;
+    } else {
+      return findParentByClassName(targetClass, currentParent);
     }
+  } else {
+    return alert("no parent found with that class name");
+  }
 };
 var getSongItem = function(element) {
     switch (element.className) {
