@@ -53,7 +53,8 @@ var albumPicasso = {
  var $row = $(template);
 
  var clickHandler = function() {
-    var songNumber = $(this).attr('data-song-number');
+    var $songItem = $(this).find('.song-item-number');
+     var songNumber = $songItem.attr('data-song-number');
 
 	if (currentlyPlayingSong !== null) {
 		// Revert to song number for currently playing song because user started playing new song.
@@ -104,7 +105,11 @@ var albumPicasso = {
  
 var setCurrentAlbum = function(album) {
      
- 
+  var $albumTitle =       $('.album-view-title');
+  var $albumArtist =      $('.album-view-artist');
+  var $albumReleaseInfo = $('.album-view-release-info');
+  var $albumImage =       $('.album-view-cover-art');
+  var $albumSongList =    $('.album-view-song-list');
      // #2
      $albumTitle.text(album.title);
      $albumArtist.text(album.artist);
@@ -133,14 +138,4 @@ $(document).ready(function() {
   setCurrentAlbum(albumPicasso);    
      
  });
-     var albums = [albumPicasso , albumMarconi , albumMuselive ];
-     var index = 1;
-     albumImage.addEventListener("click",function(event){
-       setCurrentAlbum(albums[index]);
-       index++;
-       if (index == albums.length){
-         index = 0;
-       }
-     });
-     
- };
+    
