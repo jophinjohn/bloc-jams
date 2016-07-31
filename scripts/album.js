@@ -61,7 +61,11 @@ var albumPicasso = {
  
 var setCurrentAlbum = function(album) {
      
- 
+  var $albumTitle =       $('.album-view-title');
+  var $albumArtist =      $('.album-view-artist');
+  var $albumReleaseInfo = $('.album-view-release-info');
+  var $albumImage =       $('.album-view-cover-art');
+  var $albumSongList =    $('.album-view-song-list');
      // #2
      $albumTitle.text(album.title);
      $albumArtist.text(album.artist);
@@ -162,14 +166,6 @@ var clickHandler = function(targetElement) {
               clickHandler(event.target);
          });
      }
-     var albums = [albumPicasso , albumMarconi , albumMuselive ];
-     var index = 1;
-     albumImage.addEventListener("click",function(event){
-       setCurrentAlbum(albums[index]);
-       index++;
-       if (index == albums.length){
-         index = 0;
-       }
-     });
+     
      
  };
