@@ -1,8 +1,6 @@
-var getSongNumberCell = function(number) {
-    return $('song-item-number[data-song-number=" ' + number + '"]'); 
-}; 
+
 var createSongRow = function(songNumber, songName, songLength) {
-     
+     var songLength = filterTimeCode(songLength);
      var template =
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
@@ -111,6 +109,7 @@ var updateSeekBarWhileSongPlays = function() {
              // #11
              var seekBarFillRatio = this.getTime() / this.getDuration();
              var $seekBar = $('.seek-control .seek-bar');
+             setCurrentTimeInPlayerBar(this.getTime());
  
              updateSeekPercentage($seekBar, seekBarFillRatio);
          });
@@ -171,6 +170,38 @@ var setupSeekBars = function() {
          });
      });
  };
+// set the text of current-time class to current time in song
+var setCurrentTimeInPlayerBar = function(currentTime) {
+  $(".current-time").text(filterTimeCode(currentTime));
+};
+
+// sets the text of total-time to length of current song
+var setTotalTimeInPlayerBar = function(totalTime) {
+  $(".total-time").text(filterTimeCode(totalTime));
+};
+
+// display the time in the correct formar
+var filterTimeCode = function(timeInSeconds) {
+  var seconds = Math.floor(parseFloat(timeInSeconds));
+  var minutes = 0;
+
+  // if one minute or more have elapsed
+  while (seconds >= 60) {
+    minutes++;
+    seconds -= 60;
+  }
+
+  if (seconds < 10) {
+    seconds = "0" + seconds;
+  }
+
+  var formattedTime = minutes + ":" + seconds;
+  return formattedTime;
+};
+
+var getSongNumberCell = function(songNumber) {
+  return $('[data-song-number="' + songNumber + '"]');
+};
 var trackIndex = function(album, song) {
      return album.songs.indexOf(song);
  };
@@ -180,6 +211,7 @@ var updatePlayerBarSong = function() {
     $('.currently-playing .artist-name').text(currentAlbum.artist);
     $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + " - " + currentAlbum.artist);
     $('.main-controls .play-pause').html(playerBarPauseButton);
+    setTotalTimeInPlayerBar(currentSongFromAlbum.duration);
 };
 
 
@@ -264,7 +296,7 @@ var seek = function(time) {
      if (currentSoundFile) {
          currentSoundFile.setTime(time);
      }
- }
+ };
 var setVolume = function(volume) {
      if (currentSoundFile) {
          currentSoundFile.setVolume(volume);
