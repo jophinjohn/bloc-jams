@@ -26,7 +26,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         
 		
         currentSoundFile.play();
-        
+        updateSeekBarWhileSongPlays();
         currentlyPlayingSong = songNumber;
         updatePlayerBarSong();
         currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
@@ -40,7 +40,7 @@ var createSongRow = function(songNumber, songName, songLength) {
                 $(this).html(pauseButtonTemplate);
                 $('.main-controls .play-pause').html(playerBarPauseButton);
                 currentSoundFile.play();
-                 
+                 updateSeekBarWhileSongPlays();
             } else {
                 $(this).html(playButtonTemplate);
                 $('.main-controls .play-pause').html(playerBarPlayButton);
@@ -103,6 +103,7 @@ var setCurrentAlbum = function(album) {
      }
  };
 var updateSeekBarWhileSongPlays = function() {
+    console.log('test');
      if (currentSoundFile) {
          // #10
          currentSoundFile.bind('timeupdate', function(event) {
@@ -190,11 +191,11 @@ var filterTimeCode = function(timeInSeconds) {
     minutes++;
     seconds -= 60;
   }
-
-  if (seconds < 10) {
+if (seconds < 10) {
     seconds = "0" + seconds;
   }
 
+ 
   var formattedTime = minutes + ":" + seconds;
   return formattedTime;
 };
@@ -233,6 +234,7 @@ var nextSong = function() {
     setSong(currentSongIndex + 1);
     currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
     currentSoundFile.play();
+    updateSeekBarWhileSongPlays();
     // Update the Player Bar information
     updatePlayerBarSong();
     
@@ -265,6 +267,7 @@ var previousSong = function() {
     setSong(currentSongIndex + 1);
     currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
     currentSoundFile.play();
+    updateSeekBarWhileSongPlays();
     // Update the Player Bar information
    updatePlayerBarSong();
     
